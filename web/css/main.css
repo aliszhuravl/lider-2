@@ -3547,6 +3547,38 @@ p.fs-16 {
 	padding-left: 0 !important;
 }
 
+.five-item .simple-tile__item {
+	margin-right: 16px;
+	padding: 16px;
+}
+
+.five-item .simple-tile__item .top {
+	flex-direction: column-reverse;
+	margin-bottom: 0;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+
+.five-item .simple-tile__item .top .big_num {
+	margin-bottom: 20px;
+}
+
+.five-item .simple-tile__item .top p {
+	max-width: 100%;
+}
+
+.five-item .simple-tile__item .top .bold {
+	font-size: 15px;
+}
+
+.five-item .simple-tile__item:nth-child(4n) {
+	margin-right: 16px;
+}
+
+.five-item .simple-tile__item:nth-child(5n) {
+	margin-right: 0;
+}
+
 .video_preview {
 	position: absolute;
 	top: -50%;

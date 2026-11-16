@@ -402,3 +402,32 @@
     padding-left: 0 !important;
   }
 }
+
+.five-item {
+  .simple-tile__item {
+    padding: 16px;
+    margin-right: 16px;
+    .top {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin-bottom: 0;
+      .big_num {
+        margin-bottom: 20px;
+      }
+      p {
+        max-width: 100%;
+      }
+      .bold {
+        font-size: 15px;
+      }
+    }
+    &:nth-child(4n) {
+      margin-right: 16px;
+    }
+    &:nth-child(5n) {
+      margin-right: 0;
+    }
+  }
+
+  }

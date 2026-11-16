@@ -9,3 +9,4 @@
 //= parts/_fancybox.js
 //= parts/_sticky.js
 //= parts/_search.js
+//= parts/_counter.js

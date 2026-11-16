@@ -21,6 +21,5 @@ $(document).ready(function() {
         if (80 > scrolled) {
             $(".header").removeClass('header_sticky')
         }
-
     }
 });
