@@ -1,28 +1,38 @@
 $(document).ready(function(){
+    var $box = $("#counts");
+    if (!$box.length) return;
+
     var show = true;
-    var countbox = "#counts";
-    $(window).on("scroll load resize", function(){
-        if(!show) return false;                   // Отменяем показ анимации, если она уже была
-                                                  // выполнена
-        var w_top = $(window).scrollTop();        // Количество пикселей на которое была прокручена
-                                                  // страница
-        var e_top = $(countbox).offset().top;     // Расстояние от блока со счетчиками до верха всего
-        // документа
-        var w_height = $(window).height();        // Высота окна браузера
-        var d_height = $(document).height();      // Высота всего документа
-        var e_height = $(countbox).outerHeight(); // Полная высота блока со счетчиками
-        if(w_top + 200 >= e_top || w_height + w_top === d_height || e_height + e_top < w_height){
-            $(".spincrement").spincrement({
-                from: 0,                // Стартовое число
-                to: false,              // Итоговое число. Если false, то число будет браться из элемента
-                                        // с классом spincrement, также сюда можно напрямую прописать число.
-                                        // При этом оно может быть, как целым, так и с плавающей запятой
-                decimalPlaces: 0,       // Сколько знаков оставлять после запятой
-                decimalPoint: "",      // Разделитель десятичной части числа
-                thousandSeparator: "", // Разделитель тыcячных
-                duration: 5000          // Продолжительность анимации в миллисекундах
+    var counters = $(".spincrement").map(function () {
+        var $el = $(this);
+        var target = parseInt($el.text(), 10) || 0;
+        $el.text(0);
+        return { el: $el, target: target };
+    }).get();
+
+    function play() {
+        if (!show) return;
+        var wTop = $(window).scrollTop();
+        var wHeight = $(window).height();
+        var eTop = $box.offset().top;
+        var eHeight = $box.outerHeight();
+        var onScreen = eTop < wTop + wHeight && eTop + eHeight > wTop;
+        if (!onScreen) return;
+
+        show = false;
+        $.each(counters, function (_, item) {
+            $({ n: 0 }).animate({ n: item.target }, {
+                duration: 5000,
+                step: function (now) {
+                    item.el.text(Math.round(now));
+                },
+                complete: function () {
+                    item.el.text(item.target);
+                }
             });
-            show = false;
-        }
-    });
+        });
+    }
+
+    $(window).on("scroll resize", play);
+    play();
 });
